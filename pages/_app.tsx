@@ -1,14 +1,7 @@
 import type { AppProps } from "next/app";
-import { Provider } from "react-redux";
-import { createStore } from "redux";
-import rootReducer from "./../modules/redux/index";
+import { reduxWrapper } from "../modules/redux/store";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const store = createStore(rootReducer);
-  return (
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
-  );
+  return <Component {...pageProps} />;
 }
-export default MyApp;
+export default reduxWrapper.withRedux(MyApp);
