@@ -1,10 +1,6 @@
 import { createWrapper, HYDRATE } from "next-redux-wrapper";
-import {
-  AnyAction,
-  applyMiddleware,
-  combineReducers,
-  createStore,
-} from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import thunk from "redux-thunk";
 import user from "../reducers/user";
 
 const rootReducer = combineReducers({
@@ -39,7 +35,7 @@ const bindMiddleware = (middleware: any) => {
 };
 
 const initStore = () => {
-  return createStore(reducer, bindMiddleware([]));
+  return createStore(reducer, bindMiddleware([thunk]));
 };
 
 export const reduxWrapper = createWrapper(initStore);
