@@ -1,16 +1,6 @@
-const REGIST = "user/REGIST" as const;
+import { UserAction } from "../actions/user";
 
-export const regist = () => ({
-  type: REGIST,
-  payload: {
-    name: null,
-    icon: null,
-  },
-});
-
-type UserAction = ReturnType<typeof regist>;
-
-type UserState = {
+export type UserState = {
   name: string | null;
   icon:
     | "👩"
@@ -26,7 +16,7 @@ type UserState = {
     | null;
 };
 
-const initState = {
+const initState: UserState = {
   name: null,
   icon: null,
 };
