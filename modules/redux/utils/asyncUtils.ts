@@ -7,21 +7,22 @@ export const createPromiseThunk = (type: string, promiseCreator: any) => {
   // 이 함수는 promiseCreator가 단 하나의 파라미터만 받는다는 전제하에 작성되었습니다.
   // 만약 여러 종류의 파라미터를 전달해야하는 상황에서는 객체 타입의 파라미터를 받아오도록 하면 됩니다.
   // 예: writeComment({ postId: 1, text: '댓글 내용' });
-  return (param: any) => async (dispatch: Dispatch) => {
-    // 요청 시작
-    dispatch({ type, param });
-    try {
-      // 결과물의 이름을 payload 라는 이름으로 통일시킵니다.
-      const payload = await promiseCreator(param);
-      dispatch({ type: SUCCESS, payload }); // 성공
-    } catch (e) {
-      dispatch({ type: ERROR, payload: e, error: true }); // 실패
-    }
-  };
+  return (param: any = null) =>
+    async (dispatch: Dispatch) => {
+      // 요청 시작
+      dispatch({ type, param });
+      try {
+        // 결과물의 이름을 payload 라는 이름으로 통일시킵니다.
+        const payload = await promiseCreator(param);
+        dispatch({ type: SUCCESS, payload }); // 성공
+      } catch (e) {
+        dispatch({ type: ERROR, payload: e, error: true }); // 실패
+      }
+    };
 };
 
 // 리듀서에서 사용 할 수 있는 여러 유틸 함수들입니다.
-export const reducerUtils = {
+export const reducerUtils: any = {
   // 초기 상태. 초기 data 값은 기본적으로 null 이지만
   // 바꿀 수도 있습니다.
   initial: (initialData = null) => ({
@@ -39,7 +40,7 @@ export const reducerUtils = {
   // 성공 상태
   success: (payload: any) => ({
     loading: false,
-    data: payload,
+    data: payload.data,
     error: null,
   }),
   // 실패 상태
@@ -49,6 +50,8 @@ export const reducerUtils = {
     error: error,
   }),
 };
+
+export type initType = ReturnType<typeof reducerUtils.initial>;
 
 // 비동기 관련 액션들을 처리하는 리듀서를 만들어줍니다.
 // type 은 액션의 타입, key 는 상태의 key (예: posts, post) 입니다.

@@ -2,11 +2,11 @@ import { createWrapper, HYDRATE } from "next-redux-wrapper";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import ReduxThunk from "redux-thunk";
 import user from "../reducers/user";
-import api from "../reducers/api";
+import person from "./../reducers/person";
 
 const rootReducer = combineReducers({
   user,
-  api,
+  person,
 });
 
 // hydrate 리듀서 추가
