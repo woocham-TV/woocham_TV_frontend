@@ -1,14 +1,7 @@
+import { USER_REGIST } from "./actionTypes";
+import { createAction } from "redux-actions";
 import { UserState } from "../reducers/user";
-import { REGIST } from "./actionTypes";
 
-export function regist({ name, icon }: UserState) {
-  return {
-    type: REGIST,
-    payload: {
-      name: name,
-      icon: icon,
-    },
-  };
-}
+export const regist = createAction<UserState>(USER_REGIST);
 
 export type UserAction = ReturnType<typeof regist>;
