@@ -1,10 +1,12 @@
 import { createWrapper, HYDRATE } from "next-redux-wrapper";
 import { applyMiddleware, combineReducers, createStore } from "redux";
-import thunk from "redux-thunk";
+import ReduxThunk from "redux-thunk";
 import user from "../reducers/user";
+import api from "../reducers/api";
 
 const rootReducer = combineReducers({
   user,
+  api,
 });
 
 // hydrate 리듀서 추가
@@ -35,7 +37,7 @@ const bindMiddleware = (middleware: any) => {
 };
 
 const initStore = () => {
-  return createStore(reducer, bindMiddleware([thunk]));
+  return createStore(reducer, bindMiddleware([ReduxThunk]));
 };
 
 export const reduxWrapper = createWrapper(initStore);
