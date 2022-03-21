@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useState } from 'react';
 import MainLayer from '../../layouts/MainLayer';
 import * as P from '../../styles/common';
 
 const login = () => {
+  const [btnIdx, setBtnIdx] = useState(-1);
   const IconArray = [
     '👨',
     '👩',
@@ -27,9 +28,23 @@ const login = () => {
         <section>
           <P.PublicTitle>아이콘 선택</P.PublicTitle>
           <IconContainer>
-            {IconArray.map((ele, idx) => (
-              <IconSelector key={idx}>{ele}</IconSelector>
-            ))}
+            {IconArray.map((ele, idx) => {
+              return (
+                <IconSelector
+                  key={idx}
+                  onClick={() => {
+                    setBtnIdx(idx);
+                  }}
+                  style={
+                    btnIdx === idx
+                      ? { backgroundColor: '#7bacff' }
+                      : { backgroundColor: '#f2f2f2' }
+                  }
+                >
+                  {ele}
+                </IconSelector>
+              );
+            })}
           </IconContainer>
         </section>
         <P.PublicButton>시작하기</P.PublicButton>
