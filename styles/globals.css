@@ -19,3 +19,9 @@ a {
 p {
   margin: 0;
 }
+
+button {
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
