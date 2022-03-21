@@ -19,14 +19,11 @@ export const PublicInput = styled.input`
 export const PublicButton = styled.button`
   width: 100%;
   height: 55px;
-  border: none;
   border-radius: 5px;
   background-color: #0545b1;
   color: white;
   font-size: 18px;
   font-weight: bold;
-  cursor: pointer;
-  outline: none;
 `;
 
 export const PublicTitle = styled.p`
