@@ -15,3 +15,7 @@ a {
   box-sizing: border-box;
   font-family: 'Noto Sans KR', sans-serif;
 }
+
+p {
+  margin: 0;
+}
