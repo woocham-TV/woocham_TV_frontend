@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 import styled from '@emotion/styled';
 import VideoDetailInfor from '../../components/VideoDetailInfor';
 import Send from '../../assets/send';
+import Comment from '../../components/Comment';
 
 const pc_config = {
   iceServers: [
@@ -134,13 +135,15 @@ export default function LiveBroadcast() {
   return (
     <Wrapper>
       <Screen muted ref={localVideoRef} autoPlay />
-      <Screen id="remotevideo" ref={remoteVideoRef} autoPlay />
+      <Screen muted ref={localVideoRef} autoPlay />
+      {/*  <Screen id="remotevideo" ref={remoteVideoRef} autoPlay /> */}
       <Container>
         <TopBar>
           <VideoDetailInfor />
           <div className="live">LIVE</div>
         </TopBar>
         <BottomBar>
+          <Comment />
           <div className="input-wrapper">
             <input type="text" placeholder="댓글을 입력해 주세요." />
             <button>
