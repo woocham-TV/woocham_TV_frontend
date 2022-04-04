@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import styled from '@emotion/styled';
 import VideoDetailInfor from '../../components/VideoDetailInfor';
+import Send from '../../assets/send';
 
 const pc_config = {
   iceServers: [
@@ -139,6 +140,14 @@ export default function LiveBroadcast() {
           <VideoDetailInfor />
           <div className="live">LIVE</div>
         </TopBar>
+        <BottomBar>
+          <div className="input-wrapper">
+            <input type="text" placeholder="댓글을 입력해 주세요." />
+            <button>
+              <Send />
+            </button>
+          </div>
+        </BottomBar>
       </Container>
     </Wrapper>
   );
@@ -166,6 +175,9 @@ const Container = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: linear-gradient(
     to bottom,
     rgb(0, 0, 0, 0.3),
@@ -192,5 +204,33 @@ const TopBar = styled.div`
     color: white;
     font-size: 13px;
     font-weight: bold;
+  }
+`;
+
+const BottomBar = styled.div`
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  & .input-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    & input {
+      border: 1px solid white;
+      border-radius: 10px;
+      width: 80%;
+      height: 45px;
+      padding: 0 15px;
+      background: none;
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+      &::placeholder {
+        color: white;
+      }
+    }
   }
 `;
