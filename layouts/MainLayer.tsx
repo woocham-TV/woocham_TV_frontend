@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Header from '../components/Header';
 
 interface props {
-  children: JSX.Element;
+  children: ReactNode;
 }
 
 const MainLayer = ({ children }: props) => {
