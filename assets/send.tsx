@@ -18,9 +18,9 @@ export default function Send() {
           transform="translate(-1.575)"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
         <path
           id="패스_3"
@@ -28,9 +28,9 @@ export default function Send() {
           d="M29.5,3,20.225,29.5l-5.3-11.925L3,12.275Z"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
       </g>
     </svg>
