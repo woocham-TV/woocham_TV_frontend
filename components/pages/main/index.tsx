@@ -2,7 +2,7 @@ import MainLayer from '../../../layouts/MainLayer';
 import styled from '@emotion/styled';
 import VideoCard from '../../VideoCard';
 
-export default function Main() {
+export default function VideoList() {
   return (
     <MainLayer>
       <Title>실시간 웃참방송</Title>

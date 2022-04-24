@@ -1,5 +1,5 @@
-import Main from '../components/pages/main';
+import Login from '../components/pages/login';
 
-export default function main() {
-  return <Main />;
+export default function login() {
+  return <Login />;
 }

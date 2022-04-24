@@ -1,5 +1,5 @@
 import LiveBroadcastRoom from '../../components/pages/liveBroadcastRoom';
 
-export default function live() {
+export default function room() {
   return <LiveBroadcastRoom />;
 }
