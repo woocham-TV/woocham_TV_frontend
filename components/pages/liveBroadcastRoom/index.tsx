@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import VideoDetailInfor from '../../VideoDetailInfor';
 import Send from '../../../assets/send';
 import Comment from '../../Comment';
+import { SOCKET_SERVER_URL } from '../../../constants/env';
 
 const pc_config = {
   iceServers: [
@@ -12,7 +13,7 @@ const pc_config = {
     },
   ],
 };
-const SOCKET_SERVER_URL = 'ws://3.38.108.63:4000';
+const SERVER_URL = SOCKET_SERVER_URL as string;
 
 export default function LiveBroadcastRoom() {
   const socketRef = useRef<SocketIOClient.Socket>();
@@ -89,7 +90,7 @@ export default function LiveBroadcastRoom() {
   };
 
   useEffect(() => {
-    socketRef.current = io.connect(SOCKET_SERVER_URL);
+    socketRef.current = io.connect(SERVER_URL);
     pcRef.current = new RTCPeerConnection(pc_config);
 
     socketRef.current.on('all_users', (allUsers: Array<{ id: string }>) => {
