@@ -1,21 +1,20 @@
 import React, { useEffect, useRef } from 'react';
 import io from 'socket.io-client';
+import styled from '@emotion/styled';
+import VideoDetailInfor from '../../VideoDetailInfor';
+import Send from '../../../assets/send';
+import Comment from '../../Comment';
 
 const pc_config = {
   iceServers: [
-    // {
-    //   urls: 'stun:[STUN_IP]:[PORT]',
-    //   'credentials': '[YOR CREDENTIALS]',
-    //   'username': '[USERNAME]'
-    // },
     {
       urls: 'stun:stun.l.google.com:19302',
     },
   ],
 };
-const SOCKET_SERVER_URL = 'http://localhost:8080';
+const SOCKET_SERVER_URL = 'ws://3.38.108.63:4000';
 
-const VideoChating = () => {
+export default function LiveBroadcastRoom() {
   const socketRef = useRef<SocketIOClient.Socket>();
   const pcRef = useRef<RTCPeerConnection>();
   const localVideoRef = useRef<HTMLVideoElement>(null);
@@ -134,31 +133,106 @@ const VideoChating = () => {
   }, []);
 
   return (
-    <div>
-      <video
-        style={{
-          width: 240,
-          height: 240,
-          margin: 5,
-          backgroundColor: 'black',
-        }}
-        muted
-        ref={localVideoRef}
-        autoPlay
-      />
-      <video
-        id="remotevideo"
-        style={{
-          width: 240,
-          height: 240,
-          margin: 5,
-          backgroundColor: 'black',
-        }}
-        ref={remoteVideoRef}
-        autoPlay
-      />
-    </div>
+    <Wrapper>
+      <Screen muted ref={localVideoRef} autoPlay />
+      <Screen id="remotevideo" ref={remoteVideoRef} autoPlay />
+      <Container>
+        <TopBar>
+          <VideoDetailInfor />
+          <div className="live">LIVE</div>
+        </TopBar>
+        <BottomBar>
+          <Comment />
+          <div className="input-wrapper">
+            <input type="text" placeholder="댓글을 입력해 주세요." />
+            <button>
+              <Send />
+            </button>
+          </div>
+        </BottomBar>
+      </Container>
+    </Wrapper>
   );
-};
+}
 
-export default VideoChating;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+`;
+
+const Screen = styled.video`
+  width: 100%;
+  height: 50%;
+  background-color: #d1d1d1;
+  &:nth-of-type(2) {
+    background-color: #999999;
+  }
+  object-fit: cover;
+  transform: scaleX(-1);
+`;
+
+const Container = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(
+    to bottom,
+    rgb(0, 0, 0, 0.3),
+    rgb(0, 0, 0, 0),
+    rgb(0, 0, 0, 0),
+    rgb(0, 0, 0, 0.5)
+  );
+  z-index: 2;
+  padding: 30px 20px;
+`;
+
+const TopBar = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  & .live {
+    border-radius: 5px;
+    background: linear-gradient(#ff4141, #ff7e6a);
+    padding: 0px 13px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    height: 23px;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+  }
+`;
+
+const BottomBar = styled.div`
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  & .input-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    & input {
+      border: 1px solid white;
+      border-radius: 10px;
+      width: 80%;
+      height: 45px;
+      padding: 0 15px;
+      background: none;
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+      &::placeholder {
+        color: white;
+      }
+    }
+  }
+`;
