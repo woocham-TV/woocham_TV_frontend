@@ -1,25 +1,13 @@
 import styled from '@emotion/styled';
 import React, { useState } from 'react';
-import MainLayer from '../Layout';
+import Layout from '../Layout';
 import * as P from '../../styles/common';
+import IconSelect from './IconSelect';
 
-const Login = () => {
-  const [btnIdx, setBtnIdx] = useState(-1);
-  const IconArray = [
-    '👨',
-    '👩',
-    '🧑',
-    '👧',
-    '👨‍🦲',
-    '👶',
-    '👵',
-    '👴',
-    '🧔',
-    '👼',
-  ];
-
+export default function Login() {
+  const [iconIdx, setIconIdx] = useState(-1);
   return (
-    <MainLayer>
+    <Layout>
       <MainContainer>
         <section>
           <P.PublicTitle>웃참티비 시작하기</P.PublicTitle>
@@ -27,64 +15,25 @@ const Login = () => {
         </section>
         <section>
           <P.PublicTitle>아이콘 선택</P.PublicTitle>
-          <IconContainer>
-            {IconArray.map((ele, idx) => {
-              return (
-                <IconSelector
-                  key={idx}
-                  onClick={() => {
-                    setBtnIdx(idx);
-                  }}
-                  style={
-                    btnIdx === idx
-                      ? { backgroundColor: '#7bacff' }
-                      : { backgroundColor: '#f2f2f2' }
-                  }
-                >
-                  {ele}
-                </IconSelector>
-              );
-            })}
-          </IconContainer>
+          <IconSelect idx={iconIdx} setIdx={setIconIdx} />
         </section>
         <P.PublicButton>시작하기</P.PublicButton>
       </MainContainer>
-    </MainLayer>
+    </Layout>
   );
-};
+}
 
 const MainContainer = styled(P.PublicContainer)`
   padding-top: 90px;
-
   & > section {
     display: flex;
     flex-direction: column;
     gap: 25px;
   }
-
   & > section:first-child {
     margin-bottom: 15px;
   }
-
   & > section:nth-child(2) {
     margin-bottom: 25px;
   }
 `;
-
-const IconContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  justify-content: space-between;
-  justify-items: center;
-  row-gap: 10px;
-`;
-
-const IconSelector = styled.button`
-  width: 50px;
-  height: 50px;
-  background-color: #f2f2f2;
-  border-radius: 50%;
-  font-size: 24px;
-`;
-
-export default Login;

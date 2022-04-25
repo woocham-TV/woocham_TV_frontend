@@ -6,17 +6,15 @@ interface props {
   children: ReactNode;
 }
 
-const MainLayer = ({ children }: props) => {
+export default function Layout({ children }: props) {
   return (
     <Wrapper>
       <Header />
       {children}
     </Wrapper>
   );
-};
+}
 
 const Wrapper = styled.div`
   padding: 0 20px;
 `;
-
-export default MainLayer;
