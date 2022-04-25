@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "@emotion/styled";
-import Image from "next/image";
-import woocham_logo from "../../public/images/woocham_logo.png";
-import search_icon from "../../public/images/search_icon.svg";
-import video_icon from "../../public/images/video_icon.svg";
+import React from 'react';
+import styled from '@emotion/styled';
+import Image from 'next/image';
+import woocham_logo from '../../../public/images/woocham_logo.png';
+import search_icon from '../../../public/images/search_icon.svg';
+import video_icon from '../../../public/images/video_icon.svg';
 
 const Header = () => {
   return (
