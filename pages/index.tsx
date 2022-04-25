@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
 import Login from '../components/Login';
-import { USER_NAME_KEY, USER_ICON_KEY } from './../constants/localstorage';
 import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
+import { userState } from './../modules/recoil/user';
 
 export default function login() {
+  const user = useRecoilValue(userState);
   const router = useRouter();
 
   useEffect(() => {
-    const user_name = localStorage.getItem(USER_NAME_KEY);
-    const user_icon = localStorage.getItem(USER_ICON_KEY);
-    if (user_name && user_icon) {
+    if (user.icon && user.name) {
       router.push('/live/list');
     }
-  }, []);
+  }, [user]);
   return <Login />;
 }
