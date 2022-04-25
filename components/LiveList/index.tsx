@@ -1,4 +1,4 @@
-import MainLayer from '../Layout/MainLayer';
+import MainLayer from '../Layout';
 import styled from '@emotion/styled';
 import VideoCard from '../Common/VideoCard';
 
