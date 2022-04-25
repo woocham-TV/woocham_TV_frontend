@@ -1,22 +1,23 @@
 import styled from '@emotion/styled';
-import { UserIcons } from '../../constants/userIcon ';
+import { UserIcons } from '../../constants/userIcon';
+import { UserIcon } from '../../typings/user';
 
 interface Props {
-  idx: number;
-  setIdx(n: number): void;
+  icon: UserIcon;
+  setIcon(icon: UserIcon): void;
 }
 
-export default function IconSelect({ idx, setIdx }: Props) {
+export default function IconSelect({ icon, setIcon }: Props) {
   return (
     <IconContainer>
       {UserIcons.map((ele, index) => (
         <IconSelector
           key={index}
           onClick={() => {
-            setIdx(index);
+            setIcon(ele);
           }}
           style={
-            idx === index
+            ele === icon
               ? { backgroundColor: '#7bacff' }
               : { backgroundColor: '#f2f2f2' }
           }

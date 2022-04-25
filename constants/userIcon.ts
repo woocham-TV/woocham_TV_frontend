@@ -1,4 +1,4 @@
-import { UserIcon } from '../typings/userIcon';
+import { UserIcon } from '../typings/user';
 
 export const UserIcons: UserIcon[] = [
   '👨',
