@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import React, { useState } from 'react';
-import MainLayer from '../../../layouts/MainLayer';
-import * as P from '../../../styles/common';
+import MainLayer from '../Layout';
+import * as P from '../../styles/common';
 
 const Login = () => {
   const [btnIdx, setBtnIdx] = useState(-1);

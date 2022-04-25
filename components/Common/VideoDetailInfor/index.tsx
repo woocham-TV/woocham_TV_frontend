@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import PeopleCnt from '../../assets/peopleCnt';
+import PeopleCnt from '../../../assets/peopleCnt';
 
 export default function VideoDetailInfor() {
   return (

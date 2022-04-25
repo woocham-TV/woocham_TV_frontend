@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import React, { ReactNode } from 'react';
-import Header from '../components/Header';
+import Header from './Common/Header';
 
 interface props {
   children: ReactNode;

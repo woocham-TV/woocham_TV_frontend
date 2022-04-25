@@ -1,6 +1,6 @@
-import MainLayer from '../../../layouts/MainLayer';
+import MainLayer from '../Layout/MainLayer';
 import styled from '@emotion/styled';
-import VideoCard from '../../VideoCard';
+import VideoCard from '../Common/VideoCard';
 
 export default function VideoList() {
   return (

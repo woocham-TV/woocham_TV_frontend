@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import styled from '@emotion/styled';
-import VideoDetailInfor from '../../VideoDetailInfor';
-import Send from '../../../assets/send';
-import Comment from '../../Comment';
-import { SOCKET_SERVER_URL } from '../../../constants/env';
+import VideoDetailInfor from '../Common/VideoDetailInfor';
+import Send from '../../assets/send';
+import Comment from '../Common/Comment';
+import { SOCKET_SERVER_URL } from '../../constants/env';
 
 const pc_config = {
   iceServers: [

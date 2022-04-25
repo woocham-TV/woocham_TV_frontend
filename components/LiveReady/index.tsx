@@ -1,6 +1,6 @@
-import MainLayer from '../../../layouts/MainLayer';
+import MainLayer from '../Layout';
 import styled from '@emotion/styled';
-import { PublicInput, PublicButton } from '../../../styles/common';
+import { PublicInput, PublicButton } from '../../styles/common';
 
 export default function ReadyToBroadcast() {
   return (
