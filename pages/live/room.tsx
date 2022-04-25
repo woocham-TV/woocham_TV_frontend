@@ -1,6 +1,5 @@
-import LiveBroadcastRoom from '../../components/LiveRoom';
-import App from './../../components/LiveRoom/index1';
+import LiveRoom from '../../components/LiveRoom';
 
 export default function room() {
-  return <App />;
+  return <LiveRoom />;
 }
