@@ -1,6 +1,7 @@
 import MainLayer from '../Layout';
 import styled from '@emotion/styled';
 import VideoCard from '../Common/VideoCard';
+import { PublicTitle } from './../../styles/common';
 
 export default function VideoList() {
   return (
@@ -16,10 +17,7 @@ export default function VideoList() {
   );
 }
 
-const Title = styled.h1`
-  color: #363636;
-  font-size: 16px;
-  font-weight: bold;
+const Title = styled(PublicTitle)`
   margin-top: 15px;
 `;
 

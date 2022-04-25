@@ -1,6 +1,6 @@
 import MainLayer from '../Layout';
 import styled from '@emotion/styled';
-import { PublicInput, PublicButton } from '../../styles/common';
+import { PublicInput, PublicButton, PublicTitle } from '../../styles/common';
 
 export default function ReadyToBroadcast() {
   return (
@@ -15,9 +15,7 @@ export default function ReadyToBroadcast() {
   );
 }
 
-const Title = styled.h1`
-  font-size: 16px;
-  color: #363636;
+const Title = styled(PublicTitle)`
   margin-top: 90px;
 `;
 

@@ -26,7 +26,7 @@ export const PublicButton = styled.button`
   font-weight: bold;
 `;
 
-export const PublicTitle = styled.p`
+export const PublicTitle = styled.h1`
   color: #363636;
   font-size: 16px;
   font-weight: bold;
