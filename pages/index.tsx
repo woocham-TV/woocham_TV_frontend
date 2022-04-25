@@ -1,22 +1,17 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../modules/redux/store";
-import { getAllPerson } from "./../modules/redux/actions/person";
-import { ApiActionState } from "./../typings/api";
+import { useEffect } from 'react';
+import Login from '../components/Login';
+import { USER_NAME_KEY, USER_ICON_KEY } from './../constants/localstorage';
+import { useRouter } from 'next/router';
 
-export default function Home() {
-  const { loading, error, data }: ApiActionState<any[]> = useSelector(
-    (state: RootState) => state.person.persons
-  );
-  const dispatch = useDispatch();
+export default function login() {
+  const router = useRouter();
+
   useEffect(() => {
-    dispatch(getAllPerson());
+    const user_name = localStorage.getItem(USER_NAME_KEY);
+    const user_icon = localStorage.getItem(USER_ICON_KEY);
+    if (user_name && user_icon) {
+      router.push('/live/list');
+    }
   }, []);
-
-  console.log(loading, error, data);
-
-  if (loading) return <>로딩중</>;
-  if (error) return <>에러가 발생하였습니다.</>;
-  if (!data) return <></>;
-  return <>{data && data.map((res) => res.name)}</>;
+  return <Login />;
 }
