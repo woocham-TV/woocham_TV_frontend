@@ -3,16 +3,32 @@ import styled from '@emotion/styled';
 import { PublicInput, PublicButton, PublicTitle } from '../../styles/common';
 import { useState, ChangeEvent } from 'react';
 import { getFileData } from './../../utils/getFileData';
+import axios from 'axios';
+import { USER_NAME_KEY } from './../../constants/localstorage';
 
 export default function ReadyToBroadcast() {
   const [title, setTitle] = useState('');
   const [preview, setPreview] = useState<null | string>(null);
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<any>(null);
+  const BASE_URL =
+    'http://ec2-13-125-247-213.ap-northeast-2.compute.amazonaws.com/';
 
   const thumbnailUpload = (event: ChangeEvent<HTMLInputElement>) => {
     getFileData(event).then(res => {
       setPreview(res.preview);
+      setFile(res.file);
     });
+  };
+
+  const createLiveRoom = () => {
+    const fd = new FormData();
+    fd.append(`thumbnail`, file);
+    axios.post(
+      `${BASE_URL}channel?constructor=${localStorage.getItem(
+        USER_NAME_KEY,
+      )}&title=${title}`,
+      fd,
+    );
   };
   return (
     <MainLayer>
@@ -37,7 +53,7 @@ export default function ReadyToBroadcast() {
           </ThumbnailSelector>
         )}
       </label>
-      <Button>방송 시작</Button>
+      <Button onClick={createLiveRoom}>방송 시작</Button>
     </MainLayer>
   );
 }
