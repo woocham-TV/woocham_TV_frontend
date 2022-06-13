@@ -5,13 +5,12 @@ import { useState, ChangeEvent } from 'react';
 import { getFileData } from './../../utils/getFileData';
 import axios from 'axios';
 import { USER_NAME_KEY } from './../../constants/localstorage';
+import { BASE_URL } from '../../constants/url';
 
 export default function ReadyToBroadcast() {
   const [title, setTitle] = useState('');
   const [preview, setPreview] = useState<null | string>(null);
   const [file, setFile] = useState<any>(null);
-  const BASE_URL =
-    'http://ec2-13-125-247-213.ap-northeast-2.compute.amazonaws.com/';
 
   const thumbnailUpload = (event: ChangeEvent<HTMLInputElement>) => {
     getFileData(event).then(res => {

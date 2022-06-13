@@ -1,14 +1,19 @@
 import styled from '@emotion/styled';
 import PeopleCnt from '../../../assets/peopleCnt';
+import { VideoCardType } from './../../../interfaces/video';
 
-export default function VideoDetailInfor() {
+interface Props {
+  videoInfor: VideoCardType;
+}
+
+export default function VideoDetailInfor({ videoInfor }: Props) {
   return (
     <DetailInfor>
-      <h1>😁</h1>
+      <h1>{videoInfor.profile_emoji}</h1>
       <div className="container">
-        <h3>실시간 웃참방송</h3>
+        <h3>{videoInfor.title}</h3>
         <div className="flex_wrap">
-          <span>김팔복 님</span>
+          <span>{videoInfor.profile_name} 님</span>
           <div className="circle" />
           <div>
             <PeopleCnt />

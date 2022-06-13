@@ -1,14 +1,19 @@
 import styled from '@emotion/styled';
 import VideoDetailInfor from '../VideoDetailInfor';
+import { VideoCardType } from './../../../interfaces/video';
 
-export default function VideoCard() {
+interface Props {
+  videoInfor: VideoCardType;
+}
+
+export default function VideoCard({ videoInfor }: Props) {
   return (
-    <List>
+    <List url={videoInfor.thumbnail}>
       <ListCover>
         <div className="relative_cover">
           <div className="video_time">3시간 전 시작</div>
           <DetailInforWrapper>
-            <VideoDetailInfor />
+            <VideoDetailInfor videoInfor={videoInfor} />
           </DetailInforWrapper>
         </div>
       </ListCover>
@@ -16,11 +21,11 @@ export default function VideoCard() {
   );
 }
 
-const List = styled.div`
+const List = styled.div<{ url: string }>`
   width: 100%;
   height: 180px;
   border-radius: 10px;
-  background-image: url('https://d2v80xjmx68n4w.cloudfront.net/gigs/JU2Lp1593392669.jpg');
+  background-image: ${({ url }) => `url(${url})`};
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
