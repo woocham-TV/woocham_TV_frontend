@@ -33,3 +33,7 @@ button {
   outline: none;
   background: none;
 }
+
+img {
+  object-fit: cover;
+}
