@@ -14,7 +14,9 @@ const Video = ({ stream, muted }: Props) => {
     if (muted) setIsMuted(muted);
   }, [stream, muted]);
 
-  return <video ref={ref} muted={isMuted} autoPlay />;
+  return (
+    <video ref={ref} muted={isMuted} autoPlay style={{ height: '100%' }} />
+  );
 };
 
 export default Video;
