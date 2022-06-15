@@ -4,13 +4,15 @@ import { PublicInput, PublicButton, PublicTitle } from '../../styles/common';
 import { useState, ChangeEvent } from 'react';
 import { getFileData } from './../../utils/getFileData';
 import axios from 'axios';
-import { USER_NAME_KEY } from './../../constants/localstorage';
+import { USER_ICON_KEY, USER_NAME_KEY } from './../../constants/localstorage';
 import { BASE_URL } from '../../constants/url';
+import { useRouter } from 'next/router';
 
 export default function ReadyToBroadcast() {
   const [title, setTitle] = useState('');
   const [preview, setPreview] = useState<null | string>(null);
   const [file, setFile] = useState<any>(null);
+  const router = useRouter();
 
   const thumbnailUpload = (event: ChangeEvent<HTMLInputElement>) => {
     getFileData(event).then(res => {
@@ -22,12 +24,18 @@ export default function ReadyToBroadcast() {
   const createLiveRoom = () => {
     const fd = new FormData();
     fd.append(`thumbnail`, file);
-    axios.post(
-      `${BASE_URL}channel?constructor=${localStorage.getItem(
-        USER_NAME_KEY,
-      )}&title=${title}`,
-      fd,
-    );
+    axios
+      .post(
+        `${BASE_URL}channel?constructor=${localStorage.getItem(
+          USER_NAME_KEY,
+        )}&title=${title}&profile_name=${localStorage.getItem(
+          USER_NAME_KEY,
+        )}&profile_emoji=${localStorage.getItem(USER_ICON_KEY)}`,
+        fd,
+      )
+      .then(() => {
+        router.push(`/live/room?id=${localStorage.getItem(USER_NAME_KEY)}`);
+      });
   };
   return (
     <MainLayer>

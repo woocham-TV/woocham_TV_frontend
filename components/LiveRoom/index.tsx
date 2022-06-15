@@ -6,6 +6,7 @@ import VideoDetailInfor from '../Common/VideoDetailInfor';
 import Comment from '../Common/Comment';
 import Send from '../../assets/send';
 import Video from './Video';
+import { useRouter } from 'next/router';
 
 const pc_config = {
   iceServers: [
@@ -22,6 +23,10 @@ export default function LiveRoom() {
   const localVideoRef = useRef<HTMLVideoElement>(null);
   const localStreamRef = useRef<MediaStream>();
   const [users, setUsers] = useState<any[]>([]);
+  const router = useRouter();
+  const room_id = router.query.id;
+
+  console.log(room_id);
 
   const getLocalStream = useCallback(async () => {
     try {
@@ -36,7 +41,7 @@ export default function LiveRoom() {
       if (localVideoRef.current) localVideoRef.current.srcObject = localStream;
       if (!socketRef.current) return;
       socketRef.current.emit('join_room', {
-        room: '1234',
+        room: room_id,
         email: 'sample@naver.com',
       });
     } catch (e) {
@@ -214,7 +219,7 @@ export default function LiveRoom() {
       </div>
       <Container>
         <TopBar>
-          <VideoDetailInfor />
+          {/*        <VideoDetailInfor /> */}
           <div className="live">LIVE</div>
         </TopBar>
         <BottomBar>

@@ -1,14 +1,19 @@
 import styled from '@emotion/styled';
 import VideoDetailInfor from '../VideoDetailInfor';
 import { VideoCardType } from './../../../interfaces/video';
+import { useRouter } from 'next/router';
 
 interface Props {
   videoInfor: VideoCardType;
 }
 
 export default function VideoCard({ videoInfor }: Props) {
+  const router = useRouter();
   return (
-    <List url={videoInfor.thumbnail}>
+    <List
+      url={videoInfor.thumbnail}
+      onClick={() => router.push(`/live/room?id=${videoInfor.constructor}`)}
+    >
       <ListCover>
         <div className="relative_cover">
           <div className="video_time">3시간 전 시작</div>
