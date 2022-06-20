@@ -58,6 +58,7 @@ const ListWrapper = styled.div`
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   gap: 10px;
   height: 300px;
   overflow: scroll;

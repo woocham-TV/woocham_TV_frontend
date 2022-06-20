@@ -14,11 +14,11 @@ export default function VideoDetailInfor({ videoInfor }: Props) {
         <h3>{videoInfor.title}</h3>
         <div className="flex_wrap">
           <span>{videoInfor.profile_name} 님</span>
-          <div className="circle" />
-          <div>
+          {/*     <div className="circle" /> */}
+          {/*           <div>
             <PeopleCnt />
             <span>6</span>
-          </div>
+          </div> */}
         </div>
       </div>
     </DetailInfor>

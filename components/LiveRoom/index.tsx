@@ -15,6 +15,8 @@ import Send from '../../assets/send';
 import Video from './Video';
 import { useRouter } from 'next/router';
 import { USER_ICON_KEY, USER_NAME_KEY } from '../../constants/localstorage';
+import axios from 'axios';
+import { BASE_URL } from './../../constants/url';
 
 const pc_config = {
   iceServers: [
@@ -35,6 +37,7 @@ export default function LiveRoom() {
   const room_id = router.query.id;
   const [msg, setMsg] = useState('');
   const [commentData, setCommentData] = useState<any>([]);
+  const [videoInfor, setVideoInfor] = useState<any>();
 
   const getLocalStream = useCallback(async () => {
     try {
@@ -239,6 +242,13 @@ export default function LiveRoom() {
     setMsg(event.target.value);
   };
 
+  useEffect(() => {
+    room_id &&
+      axios.get(`${BASE_URL}channel/${room_id}`).then(res => {
+        setVideoInfor(res.data);
+      });
+  }, [room_id]);
+
   return (
     <Wrapper>
       <video muted ref={localVideoRef} autoPlay />
@@ -249,7 +259,17 @@ export default function LiveRoom() {
       </div>
       <Container>
         <TopBar>
-          {/*        <VideoDetailInfor /> */}
+          {videoInfor && (
+            <VideoDetailInfor
+              videoInfor={{
+                profile_emoji: videoInfor.profile_emoji,
+                profile_name: videoInfor.profile_name,
+                thumbnail: '',
+                title: videoInfor.title,
+                constructor: 'd',
+              }}
+            />
+          )}
           <div className="live">LIVE</div>
         </TopBar>
         <BottomBar>
