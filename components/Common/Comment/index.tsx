@@ -1,44 +1,28 @@
 import styled from '@emotion/styled';
+import { useEffect } from 'react';
 
-export default function Comment() {
+export default function Comment({ data }: any) {
+  useEffect(() => {
+    document
+      .getElementById('comment_wrap')
+      ?.scrollTo(
+        0,
+        document.getElementById('comment_wrap')?.scrollHeight as number,
+      );
+  }, [data]);
   return (
-    <ListWrapper>
-      <CommentWrapper>
-        <CommentContainer>
-          <h1>😀</h1>
-          <div>
-            <span>정지원 님</span>
-            <p>안녕하세요</p>
-          </div>
-        </CommentContainer>
-      </CommentWrapper>
-      <CommentWrapper>
-        <CommentContainer>
-          <h1>😀</h1>
-          <div>
-            <span>정지원 님</span>
-            <p>안녕하세요</p>
-          </div>
-        </CommentContainer>
-      </CommentWrapper>
-      <CommentWrapper>
-        <CommentContainer>
-          <h1>😀</h1>
-          <div>
-            <span>정지원 님</span>
-            <p>안녕하세요</p>
-          </div>
-        </CommentContainer>
-      </CommentWrapper>
-      <CommentWrapper>
-        <CommentContainer>
-          <h1>😀</h1>
-          <div>
-            <span>정지원 님</span>
-            <p>안녕하세요</p>
-          </div>
-        </CommentContainer>
-      </CommentWrapper>
+    <ListWrapper id="comment_wrap">
+      {data.map((_: any, idx: number) => (
+        <CommentWrapper key={idx}>
+          <CommentContainer>
+            <h1>{_.emoji}</h1>
+            <div>
+              <span>{_.nickname} 님</span>
+              <p>{_.message}</p>
+            </div>
+          </CommentContainer>
+        </CommentWrapper>
+      ))}
     </ListWrapper>
   );
 }
@@ -75,4 +59,6 @@ const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  height: 300px;
+  overflow: scroll;
 `;

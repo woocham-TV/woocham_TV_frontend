@@ -1,4 +1,11 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  ChangeEvent,
+  KeyboardEvent,
+} from 'react';
 import io from 'socket.io-client';
 import { SOCKET_SERVER_URL } from '../../constants/env';
 import styled from '@emotion/styled';
@@ -7,6 +14,7 @@ import Comment from '../Common/Comment';
 import Send from '../../assets/send';
 import Video from './Video';
 import { useRouter } from 'next/router';
+import { USER_ICON_KEY, USER_NAME_KEY } from '../../constants/localstorage';
 
 const pc_config = {
   iceServers: [
@@ -25,8 +33,8 @@ export default function LiveRoom() {
   const [users, setUsers] = useState<any[]>([]);
   const router = useRouter();
   const room_id = router.query.id;
-
-  console.log(room_id);
+  const [msg, setMsg] = useState('');
+  const [commentData, setCommentData] = useState<any>([]);
 
   const getLocalStream = useCallback(async () => {
     try {
@@ -196,6 +204,11 @@ export default function LiveRoom() {
       setUsers(oldUsers => oldUsers.filter(user => user.id !== data.id));
     });
 
+    // 댓글 받는 부분
+    socketRef.current?.on('receive_message', (data: any) => {
+      setCommentData((_: any) => [..._, data]);
+    });
+
     return () => {
       if (socketRef.current) {
         socketRef.current.disconnect();
@@ -208,6 +221,23 @@ export default function LiveRoom() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createPeerConnection, getLocalStream]);
+
+  const sendMessage = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.keyCode === 13) {
+      // socket 댓글 연결파트
+      setMsg('');
+      socketRef.current?.emit('message', {
+        message: event.currentTarget.value,
+        room: room_id,
+        emoji: localStorage.getItem(USER_ICON_KEY),
+        nickname: localStorage.getItem(USER_NAME_KEY),
+      });
+    }
+  };
+
+  const setMsgContents = (event: ChangeEvent<HTMLInputElement>) => {
+    setMsg(event.target.value);
+  };
 
   return (
     <Wrapper>
@@ -223,9 +253,15 @@ export default function LiveRoom() {
           <div className="live">LIVE</div>
         </TopBar>
         <BottomBar>
-          <Comment />
+          <Comment data={commentData} />
           <div className="input-wrapper">
-            <input type="text" placeholder="댓글을 입력해 주세요." />
+            <input
+              type="text"
+              placeholder="댓글을 입력해 주세요."
+              onKeyDown={sendMessage}
+              onChange={setMsgContents}
+              value={msg}
+            />
             <button>
               <Send />
             </button>
